@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="逐步播放、暫停和倒回四種排序演算法，觀察長條圖上的比較、交換與定位。">
+  <title>排序實驗室 · Sorting Lab</title>
+  <link rel="stylesheet" href="assets/site.css">
+  <script src="assets/algorithms.js" defer></script>
+  <script src="assets/app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">跳至排序操作區</a>
+  <header class="page-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="./index.html" aria-current="page">
+        <span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>排序實驗室</span>
+      </a>
+      <nav aria-label="主要導覽">
+        <a href="#workspace">操作區</a>
+        <a href="#notes">演算法筆記</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="intro" aria-labelledby="title">
+      <h1 id="title">看見排序的每一步<span>。</span></h1>
+      <p>選一種演算法，觀察數字如何從打亂的順序排到從小到大。</p>
+    </section>
+    <noscript><p class="noscript">請啟用 JavaScript 以操作排序圖。</p></noscript>
+    <div class="lab-grid" id="lab" hidden>
+      <section class="panel workspace" id="workspace" aria-labelledby="workspace-title" tabindex="-1">
+        <div class="panel-heading">
+          <h2 id="workspace-title">排序操作區</h2>
+          <p class="step-counter" id="step-counter">步驟 0</p>
+        </div>
+        <div class="inputs">
+          <label>演算法
+            <select id="algorithm"></select>
+          </label>
+          <label>資料筆數
+            <select id="size">
+              <option value="8">8</option>
+              <option value="12" selected>12</option>
+              <option value="20">20</option>
+              <option value="32">32</option>
+            </select>
+          </label>
+          <label>播放速度
+            <select id="speed">
+              <option value="900">0.5×</option>
+              <option value="450" selected>1×</option>
+              <option value="225">2×</option>
+              <option value="112">4×</option>
+              <option value="56">8×</option>
+            </select>
+          </label>
+          <button class="button secondary shuffle" id="shuffle" type="button">洗牌</button>
+        </div>
+        <div class="legend" aria-label="圖例">
+          <span><i class="key"></i>待處理</span>
+          <span><i class="key compare"></i>比較中</span>
+          <span><i class="key swap"></i>交換或寫入</span>
+          <span><i class="key settled"></i>已定位</span>
+        </div>
+        <div class="chart" id="chart" role="img" aria-label="長條排序圖"></div>
+        <progress id="progress" value="0" max="1" aria-label="排序步驟進度"></progress>
+        <p class="step-description" id="description" aria-live="polite" aria-atomic="true"></p>
+        <div class="transport" role="group" aria-label="播放控制">
+          <button class="button primary" id="play" type="button">▶ 播放</button>
+          <button class="button secondary" id="previous" type="button">← 上一步</button>
+          <button class="button secondary" id="next" type="button">下一步 →</button>
+          <button class="button secondary" id="reset" type="button">重設進度</button>
+        </div>
+        <dl class="metrics">
+          <div><dt>比較次數</dt><dd id="comparisons">0</dd></div>
+          <div><dt>陣列寫入</dt><dd id="writes">0</dd></div>
+        </dl>
+      </section>
+      <aside class="panel notes" id="notes" aria-labelledby="note-title">
+        <h2 id="note-title">演算法筆記</h2>
+        <div class="algorithm-title">
+          <h3 id="note-name"></h3>
+          <p id="note-english"></p>
+        </div>
+        <p class="note-copy" id="note-intro"></p>
+        <dl class="complexity">
+          <div><dt>最佳時間</dt><dd id="note-best"></dd></div>
+          <div><dt>平均時間</dt><dd id="note-average"></dd></div>
+          <div><dt>最差時間</dt><dd id="note-worst"></dd></div>
+          <div><dt>額外空間</dt><dd id="note-space"></dd></div>
+          <div><dt>穩定性</dt><dd id="note-stable"></dd></div>
+        </dl>
+        <p class="stability-note">穩定性指相同值的元素在排序後是否保留彼此的先後順序。</p>
+        <section class="observe" aria-labelledby="observe-title">
+          <h3 id="observe-title">觀察重點</h3>
+          <p id="note-strategy"></p>
+        </section>
+      </aside>
+    </div>
+    <section class="exercise" aria-labelledby="try-title">
+      <div class="exercise-icon" aria-hidden="true">↔</div>
+      <div>
+        <h2 id="try-title">用同一組資料比較</h2>
+        <p>跑完氣泡排序後，切換到選擇排序再跑一次。切換時會保留原始資料。比較兩次的陣列寫入次數，每次交換記為兩次寫入。</p>
+      </div>
+    </section>
+  </main>
+  <footer class="page-footer">
+    <div class="wrap footer-inner"><span>排序實驗室 · Sorting Lab</span><span>Homework 9</span></div>
+  </footer>
+</body>
+</html>
